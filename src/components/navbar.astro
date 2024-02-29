@@ -1,0 +1,40 @@
+---
+const pathname = Astro.url.pathname
+import logo from '@/assets/images/logo.webp'
+import CoffeeHub from '@/components/coffee-hub.astro'
+
+const menuItem = [
+{
+    title:"Home",
+    link:"/"
+},    
+{
+    title:"Our Menu",
+    link:"/our-menu"
+},{
+    title:"About Us",
+    link:"/about-us"
+}
+]
+---
+
+<nav class="sticky shadow-md p-3 md:px-6 background-shadow">
+    <div class="flex justify-between items-center">
+        <a href="/" class="cursor-pointer flex gap-3 items-center">
+            <div class="h-[50px] w-[50px] md:h-[60px] md:w-[60px] ">
+                <img alt="logo" class="rounded-full" src={logo.src} />
+            </div>
+            <div>
+                <CoffeeHub/>
+            </div>
+        </a>
+        <div class="flex gap-3 md:gap-6">
+            {
+                menuItem.map(item=>{
+                    const isActive=item.link===pathname?"underline decoration-primary decoration-4 scale-110":"";
+                    return <a href={item.link} class={`${isActive} text-sm md:text-lg font-bold`}>{item.title}</a>
+                })
+            }
+        </div>
+    </div>
+</nav>
