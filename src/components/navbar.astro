@@ -2,20 +2,9 @@
 const pathname = Astro.url.pathname
 import logo from '@/assets/images/logo.webp'
 import CoffeeHub from '@/components/coffee-hub.astro'
+import {lastChar} from '@/lib/utils';
+import {navbarItem} from '@/data/navbar'
 
-const menuItem = [
-{
-    title:"Home",
-    link:"/"
-},    
-{
-    title:"Our Menu",
-    link:"/our-menu"
-},{
-    title:"About Us",
-    link:"/about-us"
-}
-]
 ---
 
 <nav class="sticky shadow-md p-3 md:px-6 background-shadow">
@@ -30,8 +19,14 @@ const menuItem = [
         </a>
         <div class="flex gap-3 md:gap-6">
             {
-                menuItem.map(item=>{
-                    const isActive=item.link===pathname?"underline decoration-primary decoration-4 scale-110":"";
+                navbarItem.map(item=>{
+                    let itemLink = item.link;
+                    let urlPathname = pathname;
+                    // remove last of url "/"
+                    if(lastChar(item.link)==="/")itemLink=itemLink.slice(0,-1);
+                    if(lastChar(pathname)==="/")urlPathname=urlPathname.slice(0,-1);
+
+                    const isActive=itemLink===urlPathname?"underline decoration-primary decoration-4 scale-110":"";
                     return <a href={item.link} class={`${isActive} text-sm md:text-lg font-bold`}>{item.title}</a>
                 })
             }

@@ -1,0 +1,9 @@
+---
+const {title}=Astro.props
+---
+
+<div class="border-2 rounded-md p-4 ">
+    <slot name="image" />
+	<h4 class="font-bold uppercase text-center">{title}</h4>
+    <slot name="description" />
+</div>

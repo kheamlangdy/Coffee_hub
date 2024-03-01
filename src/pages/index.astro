@@ -2,7 +2,8 @@
 import Layout from '@/layouts/Layout.astro';
 import homeImage from '@/assets/images/main.webp'
 import Container from '@/components/container.astro'
-
+import Card from '@/components/card.astro';
+import {cardItem}  from '@/data/card-item'
 
 ---
 
@@ -12,7 +13,22 @@ import Container from '@/components/container.astro'
 			<img src={homeImage.src} alt="Main Image" />
 		</section>
 		<Container>
-			<h1 class="font-bold">Home page</h1>
+
+			<div class="p-4 border-2 rounded-md my-5">
+				<h2>Start your day with delicious coffee</h2>
+				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error molestiae aliquid ducimus cum. Debitis quod repellat esse, sint enim error asperiores consectetur, exercitationem reiciendis nobis repellendus cupiditate ut, aut dolores.</p>
+			</div>
+
+			<div class="grid gap-5 grid-cols-1 md:grid-cols-3">
+			{cardItem.map(item=>(
+				<Card title={item.title}>
+					<div slot="image" class="w-[80%] mx-auto md:w-full h-[300px]">
+						<img class="rounded-md" src={item.image.src} />
+					</div>
+					<p slot="description">{item.content}</p>
+				</Card>))}
+			</div>
+			
 		</Container>
 	</div>
 </Layout>

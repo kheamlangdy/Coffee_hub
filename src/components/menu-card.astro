@@ -1,0 +1,11 @@
+---
+const {drink} = Astro.props
+---
+
+<div class="border-2 p-2 rounded-md">
+    <h5>{drink.title}</h5>
+    <div class="w-full h-[150px]">
+        <img src={drink.image} />
+    </div>
+    <div class="font-semibold text-end text-gray-400">${drink.price}</div>
+</div>

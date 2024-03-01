@@ -1,11 +1,23 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Container from '@/components/container.astro'
+import Container from '@/components/container.astro';
+import {categories,drinkMenu} from '@/data/drink-menu';
+import DrinkMenuCard from '@/components/menu-card.astro'
 
 ---
 
 <Layout title="Our Menu">
 	<Container>
-		<h1 class="font-bold">Menu page</h1>
+		{
+			categories.map(category=>
+			<div>
+				<h3 class="uppercase md:pl-2">{category}</h3>
+				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+				{
+					drinkMenu.filter((drink)=>drink.category===category).map((drink)=><DrinkMenuCard drink={drink}/>)
+				}
+				</div>
+			</div>)
+		}
 	</Container>
 </Layout>
